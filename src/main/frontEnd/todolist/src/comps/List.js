@@ -31,6 +31,15 @@ const List = (props) => {
     // console.log(todo);
   };
 
+  const deleteHandler = () => {
+    try {
+      fetch(`/api/todo/${oneTodo.tid}`, { method: "DELETE" });
+      console.log(oneTodo.tid);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <li className="flex justify-between border-b">
       <span>
@@ -43,7 +52,7 @@ const List = (props) => {
         className="outline-none w-4/5"
         defaultValue={oneTodo.content}
       />
-      <button>
+      <button onClick={deleteHandler} className="outline-none">
         <BsTrash3 />
       </button>
     </li>

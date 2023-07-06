@@ -22,9 +22,14 @@ public class TodoController {
 
         toDoService.createWillDo(memoryWillDo);
     }
-    @GetMapping("todo")
+    @GetMapping("/todo")
     public List<ToDo> findAllTodo(){
         return toDoService.findAllToDo();
 //        System.out.println(toDoList);
+    }
+    @DeleteMapping("/todo/{tid}")
+    public void deleteTodo(@PathVariable long tid){
+        toDoService.deleteWillDo(tid);
+        System.out.println(tid);
     }
 }
