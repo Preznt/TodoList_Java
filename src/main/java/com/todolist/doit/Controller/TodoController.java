@@ -5,8 +5,11 @@ import com.todolist.doit.service.ToDoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api", produces = "application/json")
@@ -15,17 +18,13 @@ public class TodoController {
 
     @PostMapping("/todo")
     public void createTodo(@RequestBody ToDo toDo){
-        String test = toDo.getContent();
-        System.out.println(test);
-
         ToDo memoryWillDo = new ToDo(toDo.getEmail(),toDo.getContent(), toDo.getDueDate(), toDo.getState());
 
         toDoService.createWillDo(memoryWillDo);
     }
-
-
-    @GetMapping("test")
-    public List<String> test(){
-        return Arrays.asList("안녕하세요", "test");
+    @GetMapping("todo")
+    public List<ToDo> findAllTodo(){
+        return toDoService.findAllToDo();
+//        System.out.println(toDoList);
     }
 }

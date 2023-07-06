@@ -11,6 +11,7 @@ const TodoContextProvider = ({ children }) => {
   const [open, setOpen] = useState({
     add: false,
   });
+  const [allTodo, setAllTodo] = useState([]);
 
   const [todo, setTodo] = useState({
     email: "bjw1403@gmail.com",
@@ -23,7 +24,7 @@ const TodoContextProvider = ({ children }) => {
     setOpen({ ...open, add: !open.add });
   };
 
-  const props = { open, addOpen, todo, setTodo };
+  const props = { open, addOpen, todo, setTodo, allTodo, setAllTodo };
   return <TodoContext.Provider value={props}>{children}</TodoContext.Provider>;
 };
 
