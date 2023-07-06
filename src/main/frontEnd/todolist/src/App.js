@@ -6,11 +6,11 @@ import Title from "./comps/Title";
 function App() {
   return (
     <div className="App">
-      {/* <div className="flex flex-col place-items-center my-9">
-        <Title/> 
-        <Section/>
-      </div> */}
-      <Login />
+      <div className="flex flex-col place-items-center my-9">
+        <Title />
+        <Section />
+      </div>
+      {/* <Login /> */}
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import moment from "moment";
 
 const TodoContext = createContext();
 
@@ -11,13 +12,18 @@ const TodoContextProvider = ({ children }) => {
     add: false,
   });
 
-
+  const [todo, setTodo] = useState({
+    email: "bjw1403@gmail.com",
+    state: "no",
+    content: "",
+    dueDate: moment().format("YYYY-MM-DD"),
+  });
 
   const addOpen = () => {
     setOpen({ ...open, add: !open.add });
   };
 
-  const props = { open, addOpen };
+  const props = { open, addOpen, todo, setTodo };
   return <TodoContext.Provider value={props}>{children}</TodoContext.Provider>;
 };
 
