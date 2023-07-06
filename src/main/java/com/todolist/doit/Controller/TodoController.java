@@ -1,7 +1,7 @@
 package com.todolist.doit.Controller;
 
-import com.todolist.doit.domain.WillDo;
-import com.todolist.doit.service.WillDoService;
+import com.todolist.doit.domain.ToDo;
+import com.todolist.doit.service.ToDoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,17 +11,16 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(value = "/api", produces = "application/json")
 public class TodoController {
-    private final WillDoService willDoService;
+    private final ToDoService toDoService;
 
     @PostMapping("/todo")
-    public void createTodo(@RequestBody WillDo willdo){
-        String test = willdo.getContent();
+    public void createTodo(@RequestBody ToDo toDo){
+        String test = toDo.getContent();
         System.out.println(test);
 
-        WillDo tjkj = new WillDo(willdo.getEmail(),willdo.getContent(), willdo.getDueDate(), willdo.getState());
+        ToDo memoryWillDo = new ToDo(toDo.getEmail(),toDo.getContent(), toDo.getDueDate(), toDo.getState());
 
-
-//        willDoService.createWillDo(tjkj);
+        toDoService.createWillDo(memoryWillDo);
     }
 
 

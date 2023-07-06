@@ -11,7 +11,7 @@ const List = () => {
   //   console.log(res);
   // }, []);
 
-  const onKeyUpHandler = (e) => {
+  const onKeyDownHandler = (e) => {
     if (e.key === "Enter") {
       const fetchOption = {
         method: "POST",
@@ -21,19 +21,20 @@ const List = () => {
         body: JSON.stringify(todo),
       };
       try {
-        console.log("test");
-        fetch("/api/todo", fetchOption);
+        // console.log(e.nativeEvent.isComposing);
+        if (e.nativeEvent.isComposing === false) {
+          fetch("/api/todo", fetchOption);
+        }
       } catch (e) {
         console.log(e);
       }
-    } else {
-      setTodo({ ...todo, content: e.target.value });
-      // console.log(todo);
     }
   };
 
-  const onChangeHandler = (e) => {
+  const onKeyUpHandler = (e) => {
+    // console.log(e.nativeEvent.isComposing);
     setTodo({ ...todo, content: e.target.value });
+    // console.log(todo);
   };
 
   return (
@@ -45,6 +46,7 @@ const List = () => {
           </span>
           <input
             onKeyUp={onKeyUpHandler}
+            onKeyDown={onKeyDownHandler}
             placeholder="할 일을 입력 해 주세요"
             className="outline-none w-4/5"
           />

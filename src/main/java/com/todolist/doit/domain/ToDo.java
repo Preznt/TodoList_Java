@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @ToString
 @NoArgsConstructor
-public class WillDo {
+public class ToDo {
 
 
         @Id
@@ -33,7 +33,7 @@ public class WillDo {
         private String state;
 
         @Builder
-        public WillDo( String email, String content, String dueDate, String state) {
+        public ToDo(String email, String content, String dueDate, String state) {
                 this.email = email;
                 this.content = content;
                 this.dueDate = dueDate;
