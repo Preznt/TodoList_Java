@@ -13,16 +13,16 @@ public class ToDoService {
 
     private final ToDoRepository toDoRepository;
 
-    public void createWillDo(ToDo willDo){
+    public void createToDo(ToDo willDo){
         toDoRepository.save(willDo);
     }
-    
+
 
     public List<ToDo> findAllToDo(){
         return toDoRepository.findAll();
     }
 
-    public void deleteWillDo(long tid){
+    public void deleteToDo(long tid){
         toDoRepository.deleteById(tid);
     }
 

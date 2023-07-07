@@ -17,7 +17,10 @@ const List = (props) => {
       try {
         // console.log(e.nativeEvent.isComposing);
         if (e.nativeEvent.isComposing === false) {
-          fetch("/api/todo", fetchOption);
+          fetch(
+            oneTodo ? `/api/todo?tid=${oneTodo.tid}` : "/api/todo",
+            fetchOption
+          );
         }
       } catch (e) {
         console.log(e);
@@ -50,7 +53,7 @@ const List = (props) => {
         onKeyDown={onKeyDownHandler}
         placeholder="할 일을 입력 해 주세요"
         className="outline-none w-4/5"
-        defaultValue={oneTodo.content}
+        defaultValue={oneTodo ? oneTodo.content : ""}
       />
       <button onClick={deleteHandler} className="outline-none">
         <BsTrash3 />

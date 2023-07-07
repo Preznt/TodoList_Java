@@ -5,10 +5,7 @@ import com.todolist.doit.service.ToDoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,11 +14,18 @@ public class TodoController {
     private final ToDoService toDoService;
 
     @PostMapping("/todo")
-    public void createTodo(@RequestBody ToDo toDo){
-        ToDo memoryWillDo = new ToDo(toDo.getEmail(),toDo.getContent(), toDo.getDueDate(), toDo.getState());
+    public void createTodo(@RequestBody ToDo toDo ,@RequestParam(value = "tid", required = false) Long tid){
+        ToDo memoryWillDo;
 
-        toDoService.createWillDo(memoryWillDo);
+        if(tid != null) {
+            memoryWillDo = new ToDo(tid, toDo.getEmail(), toDo.getContent(), toDo.getDueDate(), toDo.getState());
+        }else {
+            memoryWillDo = new ToDo(toDo.getEmail(), toDo.getContent(), toDo.getDueDate(), toDo.getState());
+        }
+        toDoService.createToDo(memoryWillDo);
+
     }
+
     @GetMapping("/todo")
     public List<ToDo> findAllTodo(){
         return toDoService.findAllToDo();
@@ -29,7 +33,9 @@ public class TodoController {
     }
     @DeleteMapping("/todo/{tid}")
     public void deleteTodo(@PathVariable long tid){
-        toDoService.deleteWillDo(tid);
-        System.out.println(tid);
+        toDoService.deleteToDo(tid);
+//        System.out.println(tid);
     }
+
+
 }

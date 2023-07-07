@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import List from "./List";
 import { useTodoContext } from "../context/TodoContext";
+import AddList from "./AddList";
 
 const Section = () => {
   const { allTodo, setAllTodo } = useTodoContext();
@@ -21,6 +22,7 @@ const Section = () => {
   return (
     <section className="w-3/4 mt-5">
       <ul>{allTodoList}</ul>
+      <AddList />
     </section>
   );
 };

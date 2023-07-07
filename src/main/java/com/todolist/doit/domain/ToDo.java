@@ -18,7 +18,7 @@ public class ToDo {
         @Id
         @Column(name = "t_id")
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private long tId;
+        private Long tId;
 
         @Column
         private String email;
@@ -34,6 +34,15 @@ public class ToDo {
 
         @Builder
         public ToDo(String email, String content, String dueDate, String state) {
+                this.email = email;
+                this.content = content;
+                this.dueDate = dueDate;
+                this.state = state;
+        }
+
+        @Builder
+        public ToDo(Long tid,String email, String content, String dueDate, String state) {
+                this.tId = tid;
                 this.email = email;
                 this.content = content;
                 this.dueDate = dueDate;
