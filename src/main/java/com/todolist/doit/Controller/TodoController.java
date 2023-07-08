@@ -23,7 +23,6 @@ public class TodoController {
             memoryWillDo = new ToDo(toDo.getEmail(), toDo.getContent(), toDo.getDueDate(), toDo.getState());
         }
         toDoService.createToDo(memoryWillDo);
-
     }
 
     @GetMapping("/todo")
@@ -36,6 +35,7 @@ public class TodoController {
         toDoService.deleteToDo(tid);
 //        System.out.println(tid);
     }
+
 
 
 }

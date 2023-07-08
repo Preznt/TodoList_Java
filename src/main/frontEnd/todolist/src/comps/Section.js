@@ -4,24 +4,21 @@ import { useTodoContext } from "../context/TodoContext";
 import AddList from "./AddList";
 
 const Section = () => {
-  const { allTodo, setAllTodo } = useTodoContext();
+  const { allTodo, findAllTodo } = useTodoContext();
 
   useEffect(() => {
-    (async () => {
-      const res = await fetch("/api/todo");
-      const result = await res.json();
-      await setAllTodo([...result]);
-      console.log(allTodo);
-    })();
+    findAllTodo();
   }, []);
 
   const allTodoList = allTodo.map((todo, index) => {
     return <List oneTodo={todo} key={index} />;
   });
 
+  // console.log(allTodo);
+
   return (
     <section className="w-3/4 mt-5">
-      <ul>{allTodoList}</ul>
+      {allTodo ? <ul>{allTodoList}</ul> : ""}
       <AddList />
     </section>
   );

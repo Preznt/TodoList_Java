@@ -30,10 +30,10 @@ public class ToDo {
         private String dueDate;
 
         @Column
-        private String state;
+        private Boolean state;
 
         @Builder
-        public ToDo(String email, String content, String dueDate, String state) {
+        public ToDo(String email, String content, String dueDate, Boolean state) {
                 this.email = email;
                 this.content = content;
                 this.dueDate = dueDate;
@@ -41,7 +41,7 @@ public class ToDo {
         }
 
         @Builder
-        public ToDo(Long tid,String email, String content, String dueDate, String state) {
+        public ToDo(Long tid,String email, String content, String dueDate, Boolean state) {
                 this.tId = tid;
                 this.email = email;
                 this.content = content;

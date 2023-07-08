@@ -10,12 +10,14 @@ const useTodoContext = () => {
 const TodoContextProvider = ({ children }) => {
   const [open, setOpen] = useState({
     add: false,
+    test: false,
   });
+
   const [allTodo, setAllTodo] = useState([]);
 
   const [todo, setTodo] = useState({
     email: "bjw1403@gmail.com",
-    state: "no",
+    state: false,
     content: "",
     dueDate: moment().format("YYYY-MM-DD"),
   });
@@ -24,7 +26,23 @@ const TodoContextProvider = ({ children }) => {
     setOpen({ ...open, add: !open.add });
   };
 
-  const props = { open, addOpen, todo, setTodo, allTodo, setAllTodo };
+  const findAllTodo = async () => {
+    const res = await fetch("/api/todo");
+    const result = await res.json();
+    setAllTodo([...result]);
+    console.log(allTodo);
+  };
+
+  const props = {
+    open,
+    setOpen,
+    addOpen,
+    todo,
+    setTodo,
+    allTodo,
+    setAllTodo,
+    findAllTodo,
+  };
   return <TodoContext.Provider value={props}>{children}</TodoContext.Provider>;
 };
 
