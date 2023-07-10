@@ -3,14 +3,18 @@ import List from "./List";
 import { useTodoContext } from "../context/TodoContext";
 
 const AddList = () => {
-  const { open, addOpen } = useTodoContext();
+  const { open, addOpen, onKeyUpHandler, onKeyDownHandler } = useTodoContext();
+  console.log("addList");
+
   return (
     <>
       {open.add ? <List /> : ""}
-      <button onClick={addOpen}>
-        <AiOutlinePlus />
-      </button>
-      <h1>할 일 추가</h1>
+      <div className="flex border-b py-2 ">
+        <button className="outline-none" onClick={addOpen}>
+          <AiOutlinePlus />
+        </button>
+        <h1 className="ml-16">할 일 추가</h1>
+      </div>
     </>
   );
 };
