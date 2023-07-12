@@ -10,7 +10,6 @@ const useTodoContext = () => {
 const TodoContextProvider = ({ children }) => {
   const [open, setOpen] = useState({
     add: false,
-    test: false,
   });
 
   const [allTodo, setAllTodo] = useState([]);
@@ -29,33 +28,24 @@ const TodoContextProvider = ({ children }) => {
   const findAllTodo = async () => {
     const res = await fetch("/api/todo");
     const result = await res.json();
-    setAllTodo([...result]);
-    console.log(allTodo);
+    setAllTodo(result);
   };
 
-  const deleteHandler = (id) => {
-    try {
-      fetch(`/api/todo/${id}`, { method: "DELETE" });
+  const updateHandler = async (fetchOption, id) => {
+    fetchOption.method = "PUT";
 
-      // const removeList = allTodo.filter((t) => {
-      //   return t.tid !== oneTodo.tid;
-      // });
+    await fetch(`/api/todo/${id}`, fetchOption);
+    const updateList = allTodo.map((t) => {
+      if (t.tid === id) {
+        t.content = todo.content;
+      }
+      return t;
+    });
 
-      setAllTodo((allTodo) => [
-        ...allTodo.filter((t) => {
-          return t.tid !== id;
-        }),
-      ]);
-
-      console.log("삭제 핸들러");
-      // console.log(removeList);
-    } catch (e) {
-      console.log(e);
-    }
+    setAllTodo(updateList);
   };
 
-  const onKeyDownHandler = async (e) => {
-    const id = e.target.closest("LI").dataset.id;
+  const onKeyDownHandler = async (e, id) => {
     const fetchOption = {
       method: "POST",
       headers: {
@@ -67,22 +57,69 @@ const TodoContextProvider = ({ children }) => {
       try {
         // console.log(e.nativeEvent.isComposing);
         if (e.nativeEvent.isComposing === false) {
-          let res;
           if (id) {
-            res = await fetch(`/api/todo?tid=${id}`, fetchOption);
+            updateHandler(fetchOption, id);
           } else {
-            res = await fetch("/api/todo", fetchOption);
+            const res = await fetch("/api/todo", fetchOption);
+            const result = await res.json();
+            setAllTodo(result);
           }
 
-          const result = await res.json();
-          setAllTodo(result);
-
           setOpen({ ...open, add: false });
-          console.log(allTodo);
         }
       } catch (e) {
         console.log(e);
       }
+    }
+  };
+
+  const deleteHandler = async (id) => {
+    try {
+      await fetch(`/api/todo/${id}`, { method: "DELETE" });
+
+      setAllTodo((allTodo) => [
+        ...allTodo.filter((t) => {
+          return t.tid !== id;
+        }),
+      ]);
+
+      console.log("삭제 핸들러");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const stateUpdateHandler = (oneTodo) => {
+    oneTodo.state = !oneTodo.state;
+    const fetchOption = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(oneTodo),
+    };
+
+    try {
+      fetch(`/api/todo/${oneTodo.tid}`, fetchOption);
+
+      // setAllTodo((allTodo) => [
+      //   ...allTodo.map((t) => {
+      //     if (t.tid === oneTodo.tid) {
+      //       t.state = !oneTodo.state;
+      //     }
+      //     return t;
+      //   }),
+      // ]);
+      const updateList = allTodo.map((t) => {
+        if (t.tid === oneTodo.tid) {
+          t.state = oneTodo.state;
+        }
+        return t;
+      });
+
+      setAllTodo(updateList);
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -104,6 +141,7 @@ const TodoContextProvider = ({ children }) => {
     deleteHandler,
     onKeyDownHandler,
     onKeyUpHandler,
+    stateUpdateHandler,
   };
   return <TodoContext.Provider value={props}>{children}</TodoContext.Provider>;
 };

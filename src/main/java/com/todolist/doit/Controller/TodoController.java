@@ -20,26 +20,31 @@ public class TodoController {
     }
 
     @PostMapping("/todo")
-    public List<ToDo> createTodo(@RequestBody ToDo toDo , @RequestParam(value = "tid", required = false) Long tid){
+    public List<ToDo> createTodo(@RequestBody ToDo toDo ){
         ToDo memoryWillDo;
-        System.out.println(tid);
+//        System.out.println(tid);
 
-        if(tid != null) {
-            memoryWillDo = new ToDo(tid, toDo.getEmail(), toDo.getContent(), toDo.getDueDate(), toDo.getState());
-        }else {
-            memoryWillDo = new ToDo(toDo.getEmail(), toDo.getContent(), toDo.getDueDate(), toDo.getState());
-        }
+        memoryWillDo = new ToDo(toDo.getEmail(), toDo.getContent(), toDo.getDueDate(), toDo.getState());
+
         toDoService.createToDo(memoryWillDo);
         return findAllTodo();
     }
 
+    @PutMapping("/todo/{tid}")
+    public void updateTodo(@RequestBody ToDo toDo ,@PathVariable long tid){
+        ToDo memoryWillDo  = new ToDo(tid, toDo.getEmail(), toDo.getContent(), toDo.getDueDate(), toDo.getState());
+        toDoService.createToDo(memoryWillDo);
+    }
+
 
     @DeleteMapping("/todo/{tid}")
-    public List<ToDo> deleteTodo(@PathVariable long tid){
+    public void deleteTodo(@PathVariable long tid){
         toDoService.deleteToDo(tid);
 //        System.out.println(tid);
-        return findAllTodo();
+//        return findAllTodo();
     }
+
+
 
 
 

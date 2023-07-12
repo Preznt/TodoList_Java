@@ -3,8 +3,7 @@ import List from "./List";
 import { useTodoContext } from "../context/TodoContext";
 
 const AddList = () => {
-  const { open, addOpen, onKeyUpHandler, onKeyDownHandler } = useTodoContext();
-  console.log("addList");
+  const { open, addOpen } = useTodoContext();
 
   return (
     <>
