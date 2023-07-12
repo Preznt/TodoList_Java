@@ -46,6 +46,8 @@ const TodoContextProvider = ({ children }) => {
   };
 
   const onKeyDownHandler = async (e, id) => {
+    const value = e.target.value;
+    // console.log(value);
     const fetchOption = {
       method: "POST",
       headers: {
@@ -53,22 +55,28 @@ const TodoContextProvider = ({ children }) => {
       },
       body: JSON.stringify(todo),
     };
+    // 엔터키를 눌렀을 때
     if (e.key === "Enter") {
-      try {
-        // console.log(e.nativeEvent.isComposing);
-        if (e.nativeEvent.isComposing === false) {
-          if (id) {
-            updateHandler(fetchOption, id);
-          } else {
-            const res = await fetch("/api/todo", fetchOption);
-            const result = await res.json();
-            setAllTodo(result);
-          }
+      // 값이 없을 때
+      if (!value) {
+        alert("할 일을 입력해주세요");
+      } else {
+        try {
+          // 글자 조합이 다 끝났을 때
+          if (e.nativeEvent.isComposing === false) {
+            if (id) {
+              updateHandler(fetchOption, id);
+            } else {
+              const res = await fetch("/api/todo", fetchOption);
+              const result = await res.json();
+              setAllTodo(result);
+            }
 
-          setOpen({ ...open, add: false });
+            setOpen({ ...open, add: false });
+          }
+        } catch (e) {
+          console.log(e);
         }
-      } catch (e) {
-        console.log(e);
       }
     }
   };

@@ -22,7 +22,7 @@ const List = (props) => {
     >
       {oneTodo ? (
         <span
-          className="flex items-center"
+          className="flex items-center cursor-pointer"
           onClick={() => {
             stateUpdateHandler(oneTodo);
           }}
