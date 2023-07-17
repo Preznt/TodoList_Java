@@ -26,15 +26,25 @@ const TodoContextProvider = ({ children }) => {
   };
 
   const findAllTodo = async () => {
-    const res = await fetch("/api/todo");
-    const result = await res.json();
-    setAllTodo(result);
+    try {
+      const res = await fetch("/api/todo");
+      const result = await res.json();
+      // console.log(res.status);
+      setAllTodo(result);
+    } catch (error) {
+      console.log("할일 조회 : " + error);
+      alert("할 일을 조회하는데 문제가 발생했습니다.");
+    }
   };
 
   const updateHandler = async (fetchOption, id) => {
     fetchOption.method = "PUT";
+    try {
+      await fetch(`/api/todo/${id}`, fetchOption);
+    } catch (err) {
+      console.log("할 일 업데이트 : " + err);
+    }
 
-    await fetch(`/api/todo/${id}`, fetchOption);
     const updateList = allTodo.map((t) => {
       if (t.tid === id) {
         t.content = todo.content;
@@ -47,7 +57,6 @@ const TodoContextProvider = ({ children }) => {
 
   const onKeyDownHandler = async (e, id) => {
     const value = e.target.value;
-    // console.log(value);
     const fetchOption = {
       method: "POST",
       headers: {
@@ -67,11 +76,14 @@ const TodoContextProvider = ({ children }) => {
             if (id) {
               updateHandler(fetchOption, id);
             } else {
-              const res = await fetch("/api/todo", fetchOption);
-              const result = await res.json();
-              setAllTodo(result);
+              try {
+                const res = await fetch("/api/todo", fetchOption);
+                const result = await res.json();
+                setAllTodo(result);
+              } catch (err) {
+                console.log("할 일 생성: " + err);
+              }
             }
-
             setOpen({ ...open, add: false });
           }
         } catch (e) {
@@ -90,10 +102,8 @@ const TodoContextProvider = ({ children }) => {
           return t.tid !== id;
         }),
       ]);
-
-      console.log("삭제 핸들러");
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      console.log("할 일 삭제 : " + err);
     }
   };
 
