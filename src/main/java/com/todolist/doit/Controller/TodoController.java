@@ -1,8 +1,5 @@
 package com.todolist.doit.Controller;
 
-import com.todolist.doit.Controller.response.DefaultRes;
-import com.todolist.doit.Controller.response.ResponseMessage;
-import com.todolist.doit.Controller.response.StatusCode;
 import com.todolist.doit.domain.ToDo;
 import com.todolist.doit.service.ToDoService;
 import lombok.RequiredArgsConstructor;
