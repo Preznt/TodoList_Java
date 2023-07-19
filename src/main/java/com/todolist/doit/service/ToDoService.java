@@ -26,7 +26,7 @@ public class ToDoService {
         toDoRepository.deleteById(tid);
     }
 
-
+    public List<String> findDate(String email){ return toDoRepository.findAllTodoDate(email);}
 
 
 }

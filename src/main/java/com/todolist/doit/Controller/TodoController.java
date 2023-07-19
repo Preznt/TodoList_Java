@@ -14,7 +14,6 @@ import java.util.*;
 @RequestMapping(value = "/api", produces = "application/json")
 public class TodoController {
     private final ToDoService toDoService;
-//    StatusCode statusCode = new StatusCode();
 
     @GetMapping("/todo")
     public ResponseEntity<List<ToDo>> findAllTodo(){
@@ -62,8 +61,15 @@ public class TodoController {
 //        return findAllTodo();
     }
 
+    @GetMapping("/todo/date")
+    public ResponseEntity<List<String>> allTodoDates(){
+//        List<String> dates = toDoService.findDate("bjw1403@gmail.com");
+//        for(String i : dates){
+//            System.out.println(i);
+//        }
 
-
+        return ResponseEntity.ok(toDoService.findDate("bjw1403@gmail.com"));
+    }
 
 
 }
