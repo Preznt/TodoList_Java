@@ -8,6 +8,7 @@ import Section from "./comps/Section";
 import Title from "./comps/Title";
 import Slider from "react-slick";
 import CalendarContainer from "./comps/calendar/CalendarContainer";
+import TodoMain from "./comps/TodoMain";
 
 function App() {
   const settings = {
@@ -22,10 +23,7 @@ function App() {
   return (
     <div className="App">
       <Slider {...settings}>
-        <div className="flex flex-col place-items-center my-9">
-          <Title />
-          <Section />
-        </div>
+        <TodoMain />
         <CalendarContainer />
       </Slider>
       {/* <Login /> */}

@@ -1,8 +1,7 @@
-import { FaSort } from "react-icons/fa6";
 const Title = () => {
   return (
-    <header className="flex justify-between w-3/4">
-      <h1 className="font-bold text-xl">Today</h1>
+    <header className="w-3/4 text-left">
+      <h1 className="font-bold text-xl overflow-hidden">Today</h1>
     </header>
   );
 };

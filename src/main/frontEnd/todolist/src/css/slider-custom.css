@@ -1,11 +1,8 @@
 .dots_custom {
-  display: inline-block;
   position: absolute;
   top: 18px;
   left: 46%;
   vertical-align: middle;
-  margin: auto 0;
-  padding: 0;
 }
 
 .dots_custom li {
