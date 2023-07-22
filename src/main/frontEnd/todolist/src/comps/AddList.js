@@ -8,7 +8,7 @@ const AddList = () => {
   return (
     <>
       {open.add ? <List /> : ""}
-      <div className="flex border-b py-2 ">
+      <div className="flex border-b py-2 border-gray-400">
         <button className="outline-none" onClick={addOpen}>
           <AiOutlinePlus />
         </button>

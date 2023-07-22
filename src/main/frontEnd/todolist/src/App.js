@@ -3,7 +3,7 @@ import "./css/App.css";
 import Login from "./comps/Login";
 import Section from "./comps/Section";
 import Title from "./comps/Title";
-import CalendarContainer from "./comps/CalendarContainer";
+import CalendarContainer from "./comps/calendar/CalendarContainer";
 
 function App() {
   return (

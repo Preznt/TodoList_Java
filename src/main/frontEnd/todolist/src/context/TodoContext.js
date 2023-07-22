@@ -10,6 +10,7 @@ const useTodoContext = () => {
 const TodoContextProvider = ({ children }) => {
   const [open, setOpen] = useState({
     add: false,
+    sideBar: false,
   });
 
   const [allTodo, setAllTodo] = useState([]);

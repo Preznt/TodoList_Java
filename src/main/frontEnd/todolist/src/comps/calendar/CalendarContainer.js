@@ -1,12 +1,15 @@
 import { useState } from "react";
 import Calendar from "react-calendar";
-import "../css/Calendar.css";
+import "../../css/Calendar.css";
 import moment from "moment";
 import { RiTodoLine } from "react-icons/ri";
+import SideBar from "./SideBar";
+import { useTodoContext } from "../../context/TodoContext";
 
 const CalendarContainer = () => {
   const [value, onChange] = useState(new Date());
   const [mark, setMark] = useState([]);
+  const { open, setOpen } = useTodoContext();
   useState(async () => {
     try {
       const res = await fetch("/api/todo/date");
@@ -19,6 +22,7 @@ const CalendarContainer = () => {
   }, []);
   return (
     <div className="flex justify-center ">
+      <SideBar />
       <Calendar
         onChange={onChange}
         value={value}
@@ -27,7 +31,12 @@ const CalendarContainer = () => {
         tileContent={({ date, view }) => {
           if (mark.find((m) => m === moment(date).format("YYYY-MM-DD"))) {
             return (
-              <div className="w-full flex justify-end">
+              <div
+                className="w-full flex justify-end"
+                onClick={() => {
+                  setOpen({ ...open, sideBar: !open.sideBar });
+                }}
+              >
                 <RiTodoLine size="1.5em" />
               </div>
             );

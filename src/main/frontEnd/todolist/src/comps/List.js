@@ -15,8 +15,8 @@ const List = (props) => {
     <li
       className={
         oneTodo
-          ? "flex justify-between border-b mb-2 py-2"
-          : "flex justify-center border-b mb-2 py-2"
+          ? "flex justify-between border-b border-gray-400 mb-2 py-2"
+          : "flex justify-center border-b border-gray-400 mb-2 py-2"
       }
       // data-id={oneTodo ? oneTodo.tid : ""}
     >
@@ -41,8 +41,8 @@ const List = (props) => {
         placeholder="할 일을 입력 해 주세요"
         className={
           oneTodo && oneTodo.state === true
-            ? "outline-none w-4/5 line-through"
-            : "outline-none w-4/5"
+            ? "outline-none w-4/5 bg-gray-100 line-through"
+            : "outline-none w-4/5 bg-gray-100"
         }
         defaultValue={oneTodo ? oneTodo.content : ""}
       />
