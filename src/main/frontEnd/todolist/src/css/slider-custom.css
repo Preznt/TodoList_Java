@@ -1,0 +1,33 @@
+.dots_custom {
+  display: inline-block;
+  position: absolute;
+  top: 18px;
+  left: 46%;
+  vertical-align: middle;
+  margin: auto 0;
+  padding: 0;
+}
+
+.dots_custom li {
+  list-style: none;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 23px;
+  padding: 0;
+}
+
+.dots_custom li button {
+  border: none;
+  background: #d1d1d1;
+  color: transparent;
+  cursor: pointer;
+  display: block;
+  height: 13px;
+  width: 13px;
+  border-radius: 100%;
+  outline: none;
+}
+
+.dots_custom li.slick-active button {
+  background-color: #9d9d9d;
+}
