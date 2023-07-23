@@ -34,13 +34,8 @@ const CalendarContainer = () => {
               <div
                 className="w-full flex justify-end"
                 onClick={() => {
-                  // console.log(moment(date).format("YYYY-MM-DD"));
                   console.log(open.sideBar);
-                  setOpen((prevOpen) => ({
-                    ...prevOpen,
-                    sideBar: !open.sideBar,
-                  }));
-
+                  setOpen({ ...open, sideBar: true });
                   findTheDayTodo(moment(date).format("YYYY-MM-DD"));
                 }}
               >

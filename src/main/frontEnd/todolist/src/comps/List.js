@@ -3,7 +3,6 @@ import { BsCircle, BsCheckCircle } from "react-icons/bs";
 import { useTodoContext } from "../context/TodoContext";
 const List = (props) => {
   const {
-    allTodo,
     deleteHandler,
     onKeyDownHandler,
     onKeyUpHandler,

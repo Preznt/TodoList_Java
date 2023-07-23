@@ -1,10 +1,10 @@
 import { useTodoContext } from "../../context/TodoContext";
 import Section from "../Section";
 import Title from "../Title";
+import { PiCaretDoubleLeftLight } from "react-icons/pi";
 
 const SideBar = () => {
-  const { open } = useTodoContext();
-  console.log("sidebar" + open.sideBar);
+  const { open, setOpen } = useTodoContext();
   return (
     <div
       className={
@@ -13,6 +13,15 @@ const SideBar = () => {
           : "w-0"
       }
     >
+      <div className="w-5/6 text-right overflow-hidden">
+        <PiCaretDoubleLeftLight
+          size="29px"
+          className="cursor-pointer inline-block"
+          onClick={() => {
+            setOpen({ ...open, sideBar: false });
+          }}
+        />
+      </div>
       <Title />
       <Section />
     </div>
