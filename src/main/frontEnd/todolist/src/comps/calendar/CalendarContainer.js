@@ -9,17 +9,17 @@ import { useTodoContext } from "../../context/TodoContext";
 const CalendarContainer = () => {
   const [value, onChange] = useState(new Date());
   const [mark, setMark] = useState([]);
-  const { open, setOpen } = useTodoContext();
+  const { open, setOpen, findTheDayTodo } = useTodoContext();
   useState(async () => {
     try {
       const res = await fetch("/api/todo/date");
       const result = await res.json();
       setMark(result);
-      console.log(mark);
     } catch (err) {
       console.log("캘린더 useState : " + err);
     }
   }, []);
+
   return (
     <div className="flex justify-center ">
       <SideBar />
@@ -34,7 +34,14 @@ const CalendarContainer = () => {
               <div
                 className="w-full flex justify-end"
                 onClick={() => {
-                  setOpen({ ...open, sideBar: !open.sideBar });
+                  // console.log(moment(date).format("YYYY-MM-DD"));
+                  console.log(open.sideBar);
+                  setOpen((prevOpen) => ({
+                    ...prevOpen,
+                    sideBar: !open.sideBar,
+                  }));
+
+                  findTheDayTodo(moment(date).format("YYYY-MM-DD"));
                 }}
               >
                 <RiTodoLine size="1.5em" />

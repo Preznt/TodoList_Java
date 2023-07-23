@@ -15,11 +15,19 @@ import java.util.*;
 public class TodoController {
     private final ToDoService toDoService;
 
-    @GetMapping("/todo")
-    public ResponseEntity<List<ToDo>> findAllTodo(){
-            List<ToDo> todoArray = toDoService.findAllToDo();
-            return ResponseEntity.ok(todoArray);
-//        System.out.println(toDoList);
+
+//    @GetMapping("/todo")
+//    public ResponseEntity<List<ToDo>> findAllTodo(){
+//            List<ToDo> todoArray = toDoService.findAllToDo();
+//            return ResponseEntity.ok(todoArray);
+////        System.out.println(toDoList);
+//    }
+
+    @GetMapping("/todo/day/{date}")
+    public  ResponseEntity theDayTodo(@PathVariable String date){
+        System.out.println("되는지 테스트" + date);
+        List<ToDo> theDayArray = toDoService.findByDateToDo(date, "bjw1403@gmail.com");
+        return ResponseEntity.ok(theDayArray);
     }
 
     @PostMapping("/todo")
@@ -28,7 +36,7 @@ public class TodoController {
             ToDo memoryWillDo;
             memoryWillDo = new ToDo(toDo.getEmail(), toDo.getContent(), toDo.getDueDate(), toDo.getState());
             toDoService.createToDo(memoryWillDo);
-            return findAllTodo();
+            return theDayTodo(toDo.getDueDate());
         }catch (Exception e){
             return ResponseEntity.internalServerError().build();
         }
@@ -57,19 +65,15 @@ public class TodoController {
             return ResponseEntity.internalServerError().build();
         }
 
-//        System.out.println(tid);
-//        return findAllTodo();
     }
 
     @GetMapping("/todo/date")
     public ResponseEntity<List<String>> allTodoDates(){
-//        List<String> dates = toDoService.findDate("bjw1403@gmail.com");
-//        for(String i : dates){
-//            System.out.println(i);
-//        }
 
         return ResponseEntity.ok(toDoService.findDate("bjw1403@gmail.com"));
     }
+
+
 
 
 }

@@ -18,9 +18,10 @@ public class ToDoService {
     }
 
 
-    public List<ToDo> findAllToDo(){
-        return toDoRepository.findAll();
-    }
+//    public List<ToDo> findAllToDo(){
+//        return toDoRepository.findAll();
+//    }
+    public List<ToDo> findByDateToDo(String due_date, String email) { return toDoRepository.findBydueDateAndEmail(due_date, email);}
 
     public void deleteToDo(long tid){
         toDoRepository.deleteById(tid);

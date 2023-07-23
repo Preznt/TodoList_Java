@@ -10,7 +10,8 @@ import java.util.List;
 
 @Repository
 public interface ToDoRepository extends JpaRepository<ToDo,Long> {
-    // 
-    @Query(value = "SELECT DISTINCT dueDate FROM ToDo will_do WHERE will_do.email = :email")
-    List<String> findAllTodoDate(@Param("email") String userEmail);
+    List<ToDo> findBydueDateAndEmail(String dueDate, String email);
+
+    @Query(value = "SELECT DISTINCT dueDate FROM ToDo will_do WHERE email = :email")
+    List<String> findAllTodoDate(@Param("email") String email);
 }

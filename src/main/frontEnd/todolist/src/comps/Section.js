@@ -4,11 +4,11 @@ import { useTodoContext } from "../context/TodoContext";
 import AddList from "./AddList";
 
 const Section = () => {
-  const { allTodo, findAllTodo } = useTodoContext();
+  const { allTodo, findAllTodo, findTheDayTodo, today } = useTodoContext();
 
   // 전체 데이터 가져오기
   useEffect(() => {
-    findAllTodo();
+    findTheDayTodo(today);
   }, []);
 
   // 가져온 데이터로 리스트 만들기

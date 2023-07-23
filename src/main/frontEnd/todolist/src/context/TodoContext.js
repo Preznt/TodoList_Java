@@ -12,6 +12,8 @@ const TodoContextProvider = ({ children }) => {
     add: false,
     sideBar: false,
   });
+  const today = moment().format("YYYY-MM-DD");
+  const [theDay, setTheDay] = useState(today);
 
   const [allTodo, setAllTodo] = useState([]);
 
@@ -19,24 +21,24 @@ const TodoContextProvider = ({ children }) => {
     email: "bjw1403@gmail.com",
     state: false,
     content: "",
-    dueDate: moment().format("YYYY-MM-DD"),
+    dueDate: today,
   });
 
   const addOpen = () => {
     setOpen({ ...open, add: !open.add });
   };
 
-  const findAllTodo = async () => {
-    try {
-      const res = await fetch("/api/todo");
-      const result = await res.json();
-      // console.log(res.status);
-      setAllTodo(result);
-    } catch (error) {
-      console.log("할일 조회 : " + error);
-      alert("할 일을 조회하는데 문제가 발생했습니다.");
-    }
-  };
+  // const findAllTodo = async () => {
+  //   try {
+  //     const res = await fetch("/api/todo");
+  //     const result = await res.json();
+  //     // console.log(res.status);
+  //     setAllTodo(result);
+  //   } catch (error) {
+  //     console.log("할일 조회 : " + error);
+  //     alert("할 일을 조회하는데 문제가 발생했습니다.");
+  //   }
+  // };
 
   const updateHandler = async (fetchOption, id) => {
     fetchOption.method = "PUT";
@@ -58,6 +60,7 @@ const TodoContextProvider = ({ children }) => {
 
   const onKeyDownHandler = async (e, id) => {
     const value = e.target.value;
+    setTodo({ ...todo, dueDate: theDay });
     const fetchOption = {
       method: "POST",
       headers: {
@@ -148,19 +151,33 @@ const TodoContextProvider = ({ children }) => {
     // console.log(todo);
   };
 
+  const findTheDayTodo = async (date) => {
+    console.log(open.sideBar);
+
+    const res = await fetch(`api/todo/day/${date}`);
+    const result = await res.json();
+    setAllTodo(result);
+    setTheDay(date);
+    console.log(result);
+  };
+
   const props = {
     open,
+    today,
     setOpen,
+    theDay,
+    setTheDay,
     addOpen,
     todo,
     setTodo,
     allTodo,
     setAllTodo,
-    findAllTodo,
+    // findAllTodo,
     deleteHandler,
     onKeyDownHandler,
     onKeyUpHandler,
     stateUpdateHandler,
+    findTheDayTodo,
   };
   return <TodoContext.Provider value={props}>{children}</TodoContext.Provider>;
 };
