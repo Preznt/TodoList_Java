@@ -40,8 +40,8 @@ const List = (props) => {
         placeholder="할 일을 입력 해 주세요"
         className={
           oneTodo && oneTodo.state === true
-            ? "outline-none w-4/5 bg-gray-100 line-through"
-            : "outline-none w-4/5 bg-gray-100"
+            ? "outline-none w-4/5 bg-transparent line-through"
+            : "outline-none w-4/5 bg-transparent"
         }
         defaultValue={oneTodo ? oneTodo.content : ""}
       />

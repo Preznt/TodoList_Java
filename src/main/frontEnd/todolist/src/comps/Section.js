@@ -3,7 +3,7 @@ import List from "./List";
 import { useTodoContext } from "../context/TodoContext";
 import AddList from "./AddList";
 
-const Section = () => {
+const Section = (props) => {
   const { allTodo, findAllTodo, findTheDayTodo, today } = useTodoContext();
 
   // 전체 데이터 가져오기

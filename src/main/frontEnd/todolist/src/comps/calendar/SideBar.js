@@ -4,7 +4,7 @@ import Title from "../Title";
 import { PiCaretDoubleLeftLight } from "react-icons/pi";
 
 const SideBar = () => {
-  const { open, setOpen } = useTodoContext();
+  const { open, sideBarFalse } = useTodoContext();
   return (
     <div
       className={
@@ -17,9 +17,7 @@ const SideBar = () => {
         <PiCaretDoubleLeftLight
           size="29px"
           className="cursor-pointer inline-block"
-          onClick={() => {
-            setOpen({ ...open, sideBar: false });
-          }}
+          onClick={sideBarFalse}
         />
       </div>
       <Title />

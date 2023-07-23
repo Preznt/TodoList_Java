@@ -9,8 +9,10 @@ import Title from "./comps/Title";
 import Slider from "react-slick";
 import CalendarContainer from "./comps/calendar/CalendarContainer";
 import TodoMain from "./comps/TodoMain";
+import { useTodoContext } from "./context/TodoContext";
 
 function App() {
+  const { findTheDayTodo, today, sideBarFalse } = useTodoContext();
   const settings = {
     dots: true,
     infinite: true,
@@ -18,6 +20,12 @@ function App() {
     slidesToShow: 1,
     slidesToScroll: 1,
     dotsClass: "dots_custom",
+    afterChange: (currentSlide) => {
+      if (currentSlide === 0) {
+        findTheDayTodo(today);
+        sideBarFalse();
+      }
+    },
   };
 
   return (
