@@ -155,13 +155,10 @@ const TodoContextProvider = ({ children }) => {
   };
 
   const findTheDayTodo = async (date) => {
-    // console.log(open.sideBar);
-
     const res = await fetch(`api/todo/day/${date}`);
     const result = await res.json();
     setAllTodo(result);
     setTheDay(date);
-    // console.log(result);
   };
 
   const props = {

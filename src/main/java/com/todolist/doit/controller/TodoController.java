@@ -1,9 +1,8 @@
-package com.todolist.doit.Controller;
+package com.todolist.doit.controller;
 
 import com.todolist.doit.domain.ToDo;
 import com.todolist.doit.service.ToDoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
