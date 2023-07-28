@@ -16,15 +16,17 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
     private final KakaoTokenJsonData kakaoTokenJsonData;
     @GetMapping("/oauth")
-    public void kakaoAuthorize(@RequestParam String code){
-        log.info("인가 받은 코드를 이용해서 토큰을 발급 받습니다");
+    @ResponseBody
+    public String kakaoAuthorize(@RequestParam("code") String code){
         System.out.println(code);
+//        log.info("인가 받은 코드를 이용해서 토큰을 발급 받습니다");
         // 토큰 발급
-         kakaoTokenJsonData.getToken(code);
-        // 토큰으로 사용자 정보 조회
-
-        // 가입 처리
-
+         KakaoTokenResponse kakaoToken = kakaoTokenJsonData.getToken(code);
+         log.info("Kakao Token 정보 : " + kakaoToken.getAccess_token());
+//        // 토큰으로 사용자 정보 조회
+//
+//        // 가입 처리
+      return "okay";
     }
 
 //    LoginService loginService;

@@ -44,7 +44,7 @@ const List = (props) => {
             : "outline-none w-4/5 bg-transparent"
         }
         defaultValue={oneTodo ? oneTodo.content : ""}
-        readOnly={oneTodo.state ? "readOnly" : ""}
+        readOnly={oneTodo && oneTodo.state ? "readOnly" : ""}
       />
       {oneTodo ? (
         <button

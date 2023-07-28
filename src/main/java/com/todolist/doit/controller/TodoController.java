@@ -24,7 +24,6 @@ public class TodoController {
 
     @GetMapping("/todo/day/{date}")
     public  ResponseEntity theDayTodo(@PathVariable String date){
-        System.out.println("되는지 테스트" + date);
         List<ToDo> theDayArray = toDoService.findByDateToDo(date, "bjw1403@gmail.com");
         return ResponseEntity.ok(theDayArray);
     }
