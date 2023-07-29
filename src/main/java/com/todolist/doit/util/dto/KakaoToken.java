@@ -1,12 +1,9 @@
 package com.todolist.doit.util.dto;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 @Data
-public class KakaoTokenResponse {
+public class KakaoToken {
     private String token_type;
     private  String access_token;
     private Integer expires_in;
