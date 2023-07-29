@@ -30,9 +30,11 @@ public class TodoController {
 
     @PostMapping("/todo")
     public ResponseEntity createTodo(@RequestBody ToDo toDo ){
-        try {
-            ToDo memoryWillDo;
-            memoryWillDo = new ToDo(toDo.getEmail(), toDo.getContent(), toDo.getDueDate(), toDo.getState());
+        try {ToDo memoryWillDo = ToDo.builder()
+                    .email(toDo.getEmail())
+                    .content(toDo.getContent())
+                    .dueDate(toDo.getDueDate())
+                    .state(toDo.getState()).build();
             toDoService.createToDo(memoryWillDo);
             return theDayTodo(toDo.getDueDate());
         }catch (Exception e){

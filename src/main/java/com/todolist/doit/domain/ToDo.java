@@ -1,9 +1,6 @@
 package com.todolist.doit.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,9 +8,9 @@ import javax.persistence.*;
 @Table(name = "will_do")
 @Getter
 @ToString
-@NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class ToDo {
-
 
         @Id
         @Column(name = "t_id", unique = true, nullable = false)
@@ -32,22 +29,6 @@ public class ToDo {
         @Column(nullable = false)
         private Boolean state;
 
-        @Builder
-        public ToDo(String email, String content, String dueDate, Boolean state) {
-                this.email = email;
-                this.content = content;
-                this.dueDate = dueDate;
-                this.state = state;
-        }
-
-        @Builder
-        public ToDo(Long tid,String email, String content, String dueDate, Boolean state) {
-                this.tId = tid;
-                this.email = email;
-                this.content = content;
-                this.dueDate = dueDate;
-                this.state = state;
-        }
 
 
 }
