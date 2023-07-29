@@ -2,16 +2,12 @@ package com.todolist.doit.util;
 
 import com.todolist.doit.util.config.KakaoSecret;
 import com.todolist.doit.util.dto.KakaoTokenResponse;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.reactive.function.BodyInserter;
-import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+
 
 @Component
 public class KakaoTokenJsonData {
@@ -21,7 +17,7 @@ public class KakaoTokenJsonData {
     private static final String REDIRECT_URI = "http://localhost:8080/kakao/oauth";
     private static final String GRANT_TYPE = "authorization_code";
     private final String CLIENT_ID = kakaoSecret.getCLIENT_ID();
-    WebClient webClient = WebClient.create(TOKEN_URI);
+    WebClient webClient = WebClient.create();
     public KakaoTokenResponse getToken(String authorize_code){
         MultiValueMap<String, String> bodyValues = new LinkedMultiValueMap<>();
         bodyValues.add("grant_type", GRANT_TYPE);
