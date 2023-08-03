@@ -28,6 +28,8 @@ application.properties
 
 KakaoSecret.*
 
+oauthSecret.js
+
 
 
 

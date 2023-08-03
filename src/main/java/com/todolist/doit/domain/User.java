@@ -11,10 +11,10 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, unique = true)
     private Long id;
 
     @Column(length = 100)

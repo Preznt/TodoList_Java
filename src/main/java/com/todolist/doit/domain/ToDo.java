@@ -10,6 +10,7 @@ import javax.persistence.*;
 @ToString
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class ToDo {
 
         @Id
@@ -17,8 +18,8 @@ public class ToDo {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long tId;
 
-        @Column(length = 100,nullable = false)
-        private String email;
+        @Column(nullable = false)
+        private Long userId;
 
         @Column(nullable = false)
         private String content;

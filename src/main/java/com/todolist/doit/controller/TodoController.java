@@ -22,21 +22,21 @@ public class TodoController {
 ////        System.out.println(toDoList);
 //    }
 
-    @GetMapping("/todo/day/{date}")
-    public  ResponseEntity theDayTodo(@PathVariable String date){
-        List<ToDo> theDayArray = toDoService.findByDateToDo(date, "bjw1403@gmail.com");
+    @GetMapping("/todo/day/{date}/{u_id}")
+    public  ResponseEntity theDayTodo(@PathVariable String date, @PathVariable Long u_id){
+        List<ToDo> theDayArray = toDoService.findByDateToDo(date, u_id);
         return ResponseEntity.ok(theDayArray);
     }
 
     @PostMapping("/todo")
     public ResponseEntity createTodo(@RequestBody ToDo toDo ){
         try {ToDo memoryWillDo = ToDo.builder()
-                    .email(toDo.getEmail())
+                    .userId(toDo.getUserId())
                     .content(toDo.getContent())
                     .dueDate(toDo.getDueDate())
                     .state(toDo.getState()).build();
             toDoService.createToDo(memoryWillDo);
-            return theDayTodo(toDo.getDueDate());
+            return theDayTodo(toDo.getDueDate(),toDo.getUserId());
         }catch (Exception e){
             return ResponseEntity.internalServerError().build();
         }
@@ -46,7 +46,7 @@ public class TodoController {
     @PutMapping("/todo/{tid}")
     public ResponseEntity updateTodo(@RequestBody ToDo toDo ,@PathVariable long tid){
         try {
-            ToDo memoryWillDo  = new ToDo(tid, toDo.getEmail(), toDo.getContent(), toDo.getDueDate(), toDo.getState());
+            ToDo memoryWillDo  = new ToDo(tid, toDo.getUserId(), toDo.getContent(), toDo.getDueDate(), toDo.getState());
             toDoService.createToDo(memoryWillDo);
             return ResponseEntity.ok(true);
         }catch (Exception e){
@@ -67,10 +67,10 @@ public class TodoController {
 
     }
 
-    @GetMapping("/todo/date")
-    public ResponseEntity<List<String>> allTodoDates(){
+    @GetMapping("/todo/date/{u_id}")
+    public ResponseEntity<List<String>> allTodoDates(@PathVariable Long u_id){
 
-        return ResponseEntity.ok(toDoService.findDate("bjw1403@gmail.com"));
+        return ResponseEntity.ok(toDoService.findDate(u_id));
     }
 
 

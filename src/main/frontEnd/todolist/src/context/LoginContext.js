@@ -1,5 +1,4 @@
 import { createContext, useContext } from "react";
-import { KAKAO } from "../config/oauthSecret";
 
 const LoginContext = createContext();
 
@@ -8,7 +7,15 @@ const useLoginContext = () => {
 };
 
 const LoginContextProvider = ({ children }) => {
-  const props = {};
+  const kakaoLogin = async (authCode) => {
+    const res = await fetch(`/kakao/oauth?code=${authCode}`);
+    const result = await res.json();
+    console.log(result);
+    localStorage.setItem("id", result.id);
+    localStorage.setItem("token", result.token);
+    window.location.href = "/";
+  };
+  const props = { kakaoLogin };
   return (
     <LoginContext.Provider value={props}>{children}</LoginContext.Provider>
   );

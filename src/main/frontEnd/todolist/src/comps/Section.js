@@ -4,7 +4,7 @@ import { useTodoContext } from "../context/TodoContext";
 import AddList from "./AddList";
 
 const Section = (props) => {
-  const { allTodo, findAllTodo, findTheDayTodo, today } = useTodoContext();
+  const { allTodo, findTheDayTodo, today } = useTodoContext();
 
   // 전체 데이터 가져오기
   useEffect(() => {

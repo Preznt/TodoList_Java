@@ -11,8 +11,9 @@ const CalendarContainer = () => {
   const [mark, setMark] = useState([]);
   const { open, setOpen, findTheDayTodo } = useTodoContext();
   useState(async () => {
+    const u_id = localStorage.getItem("id");
     try {
-      const res = await fetch("/api/todo/date");
+      const res = await fetch(`api/todo/date/${u_id}`);
       const result = await res.json();
       setMark(result);
     } catch (err) {

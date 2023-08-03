@@ -18,7 +18,7 @@ const TodoContextProvider = ({ children }) => {
   const [allTodo, setAllTodo] = useState([]);
 
   const [todo, setTodo] = useState({
-    email: "bjw1403@gmail.com",
+    userId: localStorage.getItem("id"),
     state: false,
     content: "",
     dueDate: today,
@@ -155,7 +155,8 @@ const TodoContextProvider = ({ children }) => {
   };
 
   const findTheDayTodo = async (date) => {
-    const res = await fetch(`api/todo/day/${date}`);
+    const u_id = localStorage.getItem("id");
+    const res = await fetch(`api/todo/day/${date}/${u_id}`);
     const result = await res.json();
     setAllTodo(result);
     setTheDay(date);

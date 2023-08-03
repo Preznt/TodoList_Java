@@ -1,14 +1,10 @@
 package com.todolist.doit.service;
-
 import com.todolist.doit.domain.User;
 import com.todolist.doit.repository.LoginRepository;
 import com.todolist.doit.util.config.KakaoSecret;
-import com.todolist.doit.util.dto.KakaoAccount;
 import com.todolist.doit.util.dto.KakaoToken;
 import com.todolist.doit.util.dto.KakaoUser;
 import com.todolist.doit.util.dto.Profile;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,13 +14,14 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
 public class KakaoService {
     private KakaoSecret kakaoSecret = new KakaoSecret();
     private final LoginRepository loginRepository;
-    private static final String REDIRECT_URI = "http://localhost:8080/kakao/oauth";
+    private static final String REDIRECT_URI = "http://localhost:3000";
     private static final String GRANT_TYPE = "authorization_code";
     private final String CLIENT_ID = kakaoSecret.getCLIENT_ID();
     public KakaoToken getToken(String authorize_code){
@@ -44,6 +41,9 @@ public class KakaoService {
                 .toEntity(KakaoToken.class)
                 .block();
         System.out.println("발급받은 응답: " + response.getBody());
+
+
+
         return response.getBody();
     }
 
@@ -57,7 +57,7 @@ public class KakaoService {
                 .retrieve()
                 .toEntity(KakaoUser.class)
                 .block();
-        System.out.println("사용자 정보 가져"+response.getBody());
+        System.out.println("사용자 정보 가져오기"+response.getBody());
         return response.getBody();
     }
 
@@ -71,15 +71,17 @@ public class KakaoService {
         // 없으면 회원가입
         if(chkUser == null){
             chkUser = User.builder()
+                    .id(user.getId())
                     .nickname(profile.getNickname())
                     .email(email)
                     .thumbnail_image_url(profile.getThumbnail_image_url())
                     .profile_image_url(profile.getProfile_image_url())
                     .createTime(nowDate).build();
-            System.out.println("저장할 유저 정보:" + chkUser);
             loginRepository.save(chkUser);
         }
 
-        return chkUser;
+       return chkUser;
     }
+
+
 }

@@ -21,13 +21,13 @@ public class ToDoService {
 //    public List<ToDo> findAllToDo(){
 //        return toDoRepository.findAll();
 //    }
-    public List<ToDo> findByDateToDo(String due_date, String email) { return toDoRepository.findBydueDateAndEmail(due_date, email);}
+    public List<ToDo> findByDateToDo(String due_date, Long u_id) { return toDoRepository.findBydueDateAndUserId(due_date, u_id);}
 
     public void deleteToDo(long tid){
         toDoRepository.deleteById(tid);
     }
 
-    public List<String> findDate(String email){ return toDoRepository.findAllTodoDate(email);}
+    public List<String> findDate(Long u_id){ return toDoRepository.findAllTodoDate(u_id);}
 
 
 }
