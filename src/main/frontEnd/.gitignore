@@ -22,4 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# nodejs 파일 업로드 제외하기
+package-lock.json
+
 oauthSecret.js

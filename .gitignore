@@ -26,9 +26,10 @@ replay_pid*
 # AWS
 application.properties
 
+# Kakao 보안
 KakaoSecret.*
-
 oauthSecret.js
+
 
 
 
