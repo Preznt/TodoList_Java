@@ -8,7 +8,7 @@ const useLoginContext = () => {
 
 const LoginContextProvider = ({ children }) => {
   const kakaoLogin = async (authCode) => {
-    const res = await fetch(`/kakao/oauth?code=${authCode}`);
+    const res = await fetch(`/api/kakao?code=${authCode}`);
     const result = await res.json();
     console.log(result);
     localStorage.setItem("id", result.id);

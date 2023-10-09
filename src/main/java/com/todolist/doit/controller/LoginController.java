@@ -26,10 +26,10 @@ import static com.fasterxml.jackson.databind.jsonFormatVisitors.JsonValueFormat.
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping(value = "/kakao", produces = "application/json")
+@RequestMapping(value = "/api", produces = "application/json")
 public class LoginController {
     private final KakaoService kakaoService;
-    @GetMapping("/oauth")
+    @GetMapping("/kakao")
     @ResponseBody
     public ResponseEntity kakaoAuthorize(@RequestParam("code") String code){
         log.info("인가 받은 코드를 이용해서 토큰을 발급 받습니다");
